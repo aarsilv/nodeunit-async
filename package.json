@@ -1,0 +1,24 @@
+{
+  "name": "nodeunit-async",
+  "version": "0.0.1",
+  "author": "Aaron Silverman",
+  "license": "MIT",
+  "description": "Lighweight wrapper for nodeunit for running asychronous and database-dependent tests",
+  "keywords": [
+    "nodeunit",
+    "async",
+    "test",
+    "unittest"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Zugwalt/nodeunit-async.git"
+  },
+  "dependencies": {
+    "async": "~0.2.9"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.2"
+  }
+}
