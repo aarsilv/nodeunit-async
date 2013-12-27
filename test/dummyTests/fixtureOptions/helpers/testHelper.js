@@ -11,9 +11,9 @@ module.exports = new NodeunitAsync({
         console.log('global teardown');
         callback();
     },
-    fixtureSetup: function(calback) {
+    fixtureSetup: function(callback) {
         console.log('fixture setup');
-        calback();
+        callback();
     },
     fixtureTeardown: function() {
         console.log('fixture teardown');

@@ -11,6 +11,9 @@
     "unittest"
   ],
   "main": "index.js",
+  "scripts": {
+    "test": "nodeunit test/test-async.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/Zugwalt/nodeunit-async.git"
@@ -20,5 +23,10 @@
   },
   "devDependencies": {
     "nodeunit": "~0.8.2"
-  }
+  },
+  "readme": "Lightweight wrapper for running asynchronous nodeunit (https://github.com/caolan/nodeunit) tests.\n Particularly useful for when you want common global setup or teardown functions run for each test across multiple files, and/or fixture setup or teardown functions run once before and after all tests.\n Designed for unit tests written using async's (https://github.com/caolan/async) auto and series methods.",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/Zugwalt/nodeunit-async",
+  "_id": "nodeunit-async@0.0.1",
+  "_from": "nodeunit-async@"
 }

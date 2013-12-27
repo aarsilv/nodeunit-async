@@ -6,7 +6,7 @@ exports.testAysncTest = function(test) {
 
     test.expect(2);
 
-    th.asyncTest(test, {
+    th.runTest(test, {
         method1: [function(next) {
             console.log('Test2 method1');
             next(null, 2);
@@ -27,7 +27,7 @@ exports.testAysncTest = function(test) {
 
 exports.testSyncTest = function(test) {
 
-    th.syncTest(test, function() {
+    th.runTest(test, function() {
         console.log('Test2 sync assertions');
         test.equal(2, 1+1);
         test.equal(3, 1+2);

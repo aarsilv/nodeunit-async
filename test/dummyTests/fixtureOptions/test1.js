@@ -6,7 +6,7 @@ exports.testAysncTestAuto = function(test) {
 
     test.expect(2);
 
-    th.asyncTest(test, {
+    th.runTest(test, {
         method1: [function(next) {
             console.log('Test1 method1');
             next(null, 2);
@@ -25,21 +25,21 @@ exports.testAysncTestAuto = function(test) {
     });
 };
 
-exports.testAysncTestSeries = function(test) {
+exports.testAysncTestWaterfall = function(test) {
 
     test.expect(1);
 
     var nums = [];
 
-    th.asyncTest(test, [
+    th.runTest(test, [
         function(next) {
             console.log('Test1 method3');
             nums.push(1);
-            next()
+            next(null, 1);
         },
-        function(next) {
+        function(result, next) {
             console.log('Test1 method4');
-            nums.push(2);
+            nums.push(result+1);
             next();
         },
         function(next) {
@@ -53,7 +53,7 @@ exports.testAysncTestSeries = function(test) {
 
 exports.testSyncTest = function(test) {
 
-    th.syncTest(test, function() {
+    th.runTest(test, function() {
         console.log('Test1 sync assertions');
         test.equal(2, 1+1);
         test.equal(3, 1+2);

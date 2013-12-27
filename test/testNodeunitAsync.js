@@ -14,11 +14,11 @@ exports.testDefaults = function(test) {
             'Test3 method4',
             'Test3 second async assertions',
             'Test3 second async done',
-            '✔ testAysncTestSeries',
+            '✔ testAysncTestWaterfall',
             'Test3 sync assertions',
             'Test3 sync Done',
             '✔ testSyncTest',
-            'OK: 5 assertions'
+            'OK: 6 assertions'
         ];
         if (err) {
             throw err;
@@ -47,9 +47,11 @@ exports.testFixture = function(test) {
             'Test1 second async assertions',
             'Test1 second async done',
             'global teardown',
-            '✔ testAysncTestSeries',
+            '✔ testAysncTestWaterfall',
+            'global setup',
             'Test1 sync assertions',
             'Test1 sync done',
+            'global teardown',
             '✔ testSyncTest',
             'test2',
             'global setup',
@@ -59,8 +61,10 @@ exports.testFixture = function(test) {
             'Test2 async done',
             'global teardown',
             '✔ testAysncTest',
+            'global setup',
             'Test2 sync assertions',
             'Test2 sync done',
+            'global teardown',
             '✔ testSyncTest',
             'OK: 9 assertions',
             'fixture teardown'

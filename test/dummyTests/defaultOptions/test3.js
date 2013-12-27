@@ -7,7 +7,7 @@ exports.testAysncTestAuto = function(test) {
 
     test.expect(2);
 
-    na.asyncTest(test, {
+    na.runTest(test, {
         method1: [function(next) {
             console.log('Test3 method1');
             next(null, 2);
@@ -25,21 +25,21 @@ exports.testAysncTestAuto = function(test) {
         }]
     });
 };
-exports.testAysncTestSeries = function(test) {
+exports.testAysncTestWaterfall = function(test) {
 
     test.expect(1);
 
     var nums = [];
 
-    na.asyncTest(test, [
+    na.runTest(test, [
         function(next) {
             console.log('Test3 method3');
             nums.push(1);
-            next()
+            next(null, 1);
         },
-        function(next) {
+        function(result, next) {
             console.log('Test3 method4');
-            nums.push(2);
+            nums.push(result+1);
             next();
         },
         function(next) {
@@ -53,10 +53,11 @@ exports.testAysncTestSeries = function(test) {
 
 exports.testSyncTest = function(test) {
 
-    na.syncTest(test, function() {
+    na.runTest(test, function() {
         console.log('Test3 sync assertions');
         test.equal(2, 1+1);
         test.equal(3, 1+2);
+        test.ok(new Date().getTime() >= na.testStart());
         console.log('Test3 sync Done');
     });
 
