@@ -1,8 +1,12 @@
 var spawn = require('child_process').spawn;
+var path =require('path');
+var platform = require('os').platform();
 
 exports.testDefaults = function(test) {
+
     test.expect(1);
-    nodeUnitToCleanedOutput('test/dummyTests/defaultOptions', function(err, output) {
+
+    nodeUnitToCleanedOutput('defaultOptions', function(err, output) {
         var expectedLines = [
             'test3',
             'Test3 method1',
@@ -29,8 +33,10 @@ exports.testDefaults = function(test) {
 };
 
 exports.testFixture = function(test) {
+
     test.expect(1);
-    nodeUnitToCleanedOutput('test/dummyTests/fixtureOptions', function(err, output) {
+
+    nodeUnitToCleanedOutput('fixtureOptions', function(err, output) {
         var expectedLines = [
             'test1',
             'fixture setup',
@@ -77,13 +83,16 @@ exports.testFixture = function(test) {
     });
 };
 
-function nodeUnitToCleanedOutput(targetPath, callback) {
-    var cmd = './node_modules/nodeunit/bin/nodeunit';
-    var args = [targetPath];
+function nodeUnitToCleanedOutput(dummyTestFolder, callback) {
+    var cmd = platform !== 'win32' ? path.join('node_modules', 'nodeunit', 'bin', 'nodeunit')
+                                   : path.join('node_modules', '.bin', 'nodeunit.cmd');
+
+    var args = [path.join('test', 'dummyTests', dummyTestFolder)];
     var testOutput = '';
     var testError = '';
+    var cwd = path.join(__dirname,'..');
 
-    var nodeunit = spawn(cmd, args);
+    var nodeunit = spawn(cmd, args, {cwd: cwd});
 
     nodeunit.stdout.on('data', function (data) {
         testOutput += data;

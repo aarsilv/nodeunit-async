@@ -25,7 +25,7 @@ The constructor can be passed up to four different options.
 * ```fixtureSetup``` - method called once before all test cases. Has one required argument which is the callback to call once the fixture setup is done.
 * ```fixtureTeardown``` - method called once before after test cases. It takes no arguments.
 
-The NodeunitAsync object has a ```runTest(test, methods)``` which will execute nodeunit test methods. Any global or fixture setup and teardown methods will be called. It takes two arguments. The first argument is the test. The second argument can be:
+The NodeunitAsync object has a ```runTest(test, methods)``` method which will execute nodeunit test methods. Any global or fixture setup and teardown methods will be called. It takes two arguments. The first argument is the test. The second argument can be:
 
 * a function - this function will be executed for the test.
 * an array of functions - these functions will be executed in the fashion of async's [waterfall](https://github.com/caolan/async#waterfall).
@@ -33,7 +33,14 @@ The NodeunitAsync object has a ```runTest(test, methods)``` which will execute n
 
 There is also a ```testStart()``` method which will return a ```Date``` object constructed when the current test case was started.
 
+Lastly, if there is no listener on the ```uncaughtException``` event for ```process``` one is added so that nodeunit does not swallow the error information.
+
 ## Example: ##
+
+The best way to understand how nodeunit-async works is with some simple examples!
+
+Here we create a ```testHelper.js``` file which we include in all our test files giving us common global and fixture teardowns.
+The test files have examples of asynchronous tests in the auto and waterfall style, as well as a synchronous test.
 
 **/test/helpers/testHelper.js**
 
