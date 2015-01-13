@@ -1,6 +1,6 @@
 'use strict';
 
-var NodeunitAsync = require('../../../../lib/nodeunitAsync');
+var NodeunitAsync = require('../../../lib/nodeunitAsync');
 
 module.exports = new NodeunitAsync({
     globalSetup: function(callback) {

@@ -1,6 +1,6 @@
 'use strict';
 
-var th = require('./helpers/testHelper');
+var th = require('../helpers/testHelper');
 
 exports.testAysncTestAuto = function(test) {
 

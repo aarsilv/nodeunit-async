@@ -2,6 +2,8 @@ var spawn = require('child_process').spawn;
 var path =require('path');
 var platform = require('os').platform();
 
+var colors = require('colors');
+
 exports.testDefaults = function(test) {
 
     test.expect(1);
@@ -83,6 +85,45 @@ exports.testFixture = function(test) {
     });
 };
 
+exports.testWithFailures = function(test) {
+
+    test.expect(1);
+
+    nodeUnitToCleanedOutput('testWithErrors', function(err, output) {
+        var expectedLines = [
+            'fixture setup',
+            'global setup',
+            '✖ testAysncTestAutoCallbackError',
+            'Error: Expected 1 assertions, 0 ran',
+            'global setup',
+            '✖ testAysncTestAutoThrownError',
+            'Error: Expected 1 assertions, 0 ran',
+            'global setup',
+            'Uncaught Exception',
+            'Waterfall Callback Error',
+            '✖ testAysncTestWaterfallCallbackError',
+            'AssertionError: undefined  {}',
+            'global setup',
+            'Uncaught Exception',
+            'Waterfall Callback Error',
+            '✖ testAysncTestWaterfallThrownError',
+            'AssertionError: undefined  {}',
+            'global setup',
+            '✖ testSyncTestThrownError',
+            'global setup',
+            'global teardown',
+            '✔ testThatWillPass',
+            'FAILURES: 7/9 assertions failed'
+        ];
+        if (err) {
+            throw err;
+        }
+        test.deepEqual(expectedLines, output);
+        test.done();
+    });
+};
+
+
 function nodeUnitToCleanedOutput(dummyTestFolder, callback) {
     var cmd = platform !== 'win32' ? path.join('node_modules', 'nodeunit', 'bin', 'nodeunit')
                                    : path.join('node_modules', '.bin', 'nodeunit.cmd');
@@ -96,24 +137,34 @@ function nodeUnitToCleanedOutput(dummyTestFolder, callback) {
 
     nodeunit.stdout.on('data', function (data) {
         testOutput += data;
+        console.log(colors.grey(data));
     });
 
     nodeunit.stderr.on('data', function (data) {
         testError += data;
+        console.log(colors.yellow(data));
     });
 
-    nodeunit.on('close', function () {
+    nodeunit.on('close', function (exitCode) {
+        console.log(colors.yellow('Exited with code', exitCode));
+
         var rawOutputLines = [];
+
+
         if (testError) {
             return callback(new Error('Test sent output to stderr: '+testError));
         }
+
         testOutput.split('\n').forEach(function(line) {
             // strip out any (XXms) as well as console formatting
             line = line.replace(/(\s+\(\d+ms\)|[^a-zA-Z]\[\d+m)/g, '').trim();
+            // strip out stack traces
+            line = line.replace(/^\s*at.*/, '');
             if (line) {
                 rawOutputLines.push(line);
             }
         });
+
         callback(null, rawOutputLines);
     });
 }

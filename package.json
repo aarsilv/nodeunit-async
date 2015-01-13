@@ -1,6 +1,6 @@
 {
   "name": "nodeunit-async",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Aaron Silverman",
   "license": "MIT",
   "description": "Lighweight wrapper for nodeunit for running asychronous and database-dependent tests",
@@ -20,10 +20,11 @@
     "url": "git://github.com/Zugwalt/nodeunit-async.git"
   },
   "dependencies": {
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "colors": "^1.0.3"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.2"
+    "nodeunit": "~0.9.0"
   },
   "readme": "Lightweight wrapper for running asynchronous nodeunit (https://github.com/caolan/nodeunit) tests.\n Particularly useful for when you want common global setup or teardown functions run for each test across multiple files, and/or fixture setup or teardown functions run once before and after all tests.\n Designed for unit tests written using async's (https://github.com/caolan/async) auto and series methods.",
   "readmeFilename": "README.md",

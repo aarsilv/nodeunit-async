@@ -33,7 +33,7 @@ The NodeunitAsync object has a ```runTest(test, methods)``` method which will ex
 
 There is also a ```testStart()``` method which will return a ```Date``` object constructed when the current test case was started.
 
-Lastly, if there is no listener on the ```uncaughtException``` event for ```process``` one is added so that nodeunit does not swallow the error information.
+Lastly, a listener is added to ```process.uncaughtException``` event which will fail end the currently running test so the rest of the suite can continue.
 
 ## Example: ##
 
