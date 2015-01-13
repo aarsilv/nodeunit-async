@@ -2,8 +2,6 @@ var spawn = require('child_process').spawn;
 var path =require('path');
 var platform = require('os').platform();
 
-var colors = require('colors');
-
 exports.testDefaults = function(test) {
 
     test.expect(1);
@@ -90,26 +88,37 @@ exports.testWithFailures = function(test) {
     test.expect(1);
 
     nodeUnitToCleanedOutput('testWithErrors', function(err, output) {
-        var expectedLines = [
+        var expectedLines = [ 'test4',
+            'testAysncTestAutoCallbackError',
             'fixture setup',
             'global setup',
             '✖ testAysncTestAutoCallbackError',
             'Error: Expected 1 assertions, 0 ran',
+            'Error: Auto Callback Error',
+            'testAysncTestAutoThrownError',
             'global setup',
             '✖ testAysncTestAutoThrownError',
             'Error: Expected 1 assertions, 0 ran',
+            'Error: Auto Thrown Error',
+            'testAysncTestWaterfallCallbackError',
             'global setup',
             'Uncaught Exception',
             'Waterfall Callback Error',
+            'Error: Waterfall Callback Error',
             '✖ testAysncTestWaterfallCallbackError',
-            'AssertionError: undefined  {}',
+            'Error: Expected 1 assertions, 0 ran',
+            'testAysncTestWaterfallThrownError',
             'global setup',
             'Uncaught Exception',
             'Waterfall Callback Error',
+            'Error: Waterfall Callback Error',
             '✖ testAysncTestWaterfallThrownError',
-            'AssertionError: undefined  {}',
+            'Error: Expected 1 assertions, 0 ran',
+            'testSyncTestThrownError',
             'global setup',
             '✖ testSyncTestThrownError',
+            'Error: Sync Thrown Error',
+            'testThatWillPass',
             'global setup',
             'global teardown',
             '✔ testThatWillPass',
@@ -137,16 +146,13 @@ function nodeUnitToCleanedOutput(dummyTestFolder, callback) {
 
     nodeunit.stdout.on('data', function (data) {
         testOutput += data;
-        console.log(colors.grey(data));
     });
 
     nodeunit.stderr.on('data', function (data) {
         testError += data;
-        console.log(colors.yellow(data));
     });
 
     nodeunit.on('close', function (exitCode) {
-        console.log(colors.yellow('Exited with code', exitCode));
 
         var rawOutputLines = [];
 
