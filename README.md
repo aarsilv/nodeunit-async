@@ -18,12 +18,17 @@ Usage
 Nodeunit provides functionality for global setup and teardown functions on a per-file basis. For multiple files, construct a
 NodeunitAsync in another file required by all test files.
 
-The constructor can be passed up to four different options.
+The constructor can be passed up to four different main options.
 
 * ```globalSetup``` - method called before each test case. Has one required argument which is the callback to call once the global setup is done.
 * ```globalTeardown``` - method called after each test case. Has one required argument which is the callback to call once the global teardown is done.
 * ```fixtureSetup``` - method called once before all test cases. Has one required argument which is the callback to call once the fixture setup is done.
 * ```fixtureTeardown``` - method called once before after test cases. It takes no arguments.
+
+There are secondary options as well for extra control.
+
+* ```fixtureTeardownDelayMs``` - how many milliseconds to wait after the last test has finished to initiate the fixture teardown; Default is 100ms.
+* ```teardownWhenNoTests``` - if true, teardown will run after the delay even if no tests have ever started.
 
 The NodeunitAsync object has a ```runTest(test, methods)``` method which will execute nodeunit test methods. Any global or fixture setup and teardown methods will be called. It takes two arguments. The first argument is the test. The second argument can be:
 
