@@ -1,6 +1,6 @@
 {
   "name": "nodeunit-async",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Aaron Silverman",
   "license": "MIT",
   "description": "Lighweight wrapper for nodeunit for running asychronous and database-dependent tests",

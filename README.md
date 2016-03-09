@@ -29,6 +29,7 @@ There are secondary options as well for extra control.
 
 * ```fixtureTeardownDelayMs``` - how many milliseconds to wait after the last test has finished to initiate the fixture teardown; Default is 100ms.
 * ```teardownWhenNoTests``` - if true, teardown will run after the delay even if no tests have ever started.
+* ```noUncaughtExceptionHandler``` - if true, no listener will be attached to uncaughtException
 
 The NodeunitAsync object has a ```runTest(test, methods)``` method which will execute nodeunit test methods. Any global or fixture setup and teardown methods will be called. It takes two arguments. The first argument is the test. The second argument can be:
 
