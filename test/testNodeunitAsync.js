@@ -102,18 +102,14 @@ exports.testWithFailures = function(test) {
             'Error: Auto Thrown Error',
             'testAysncTestWaterfallCallbackError',
             'global setup',
-            'Uncaught Exception',
-            'Waterfall Callback Error',
-            'Error: Waterfall Callback Error',
             '✖ testAysncTestWaterfallCallbackError',
             'Error: Expected 1 assertions, 0 ran',
+            'Error: Waterfall Callback Error',
             'testAysncTestWaterfallThrownError',
             'global setup',
-            'Uncaught Exception',
-            'Waterfall Callback Error',
-            'Error: Waterfall Callback Error',
             '✖ testAysncTestWaterfallThrownError',
             'Error: Expected 1 assertions, 0 ran',
+            'Error: Waterfall Callback Error',
             'testSyncTestThrownError',
             'global setup',
             '✖ testSyncTestThrownError',
@@ -122,13 +118,11 @@ exports.testWithFailures = function(test) {
             'global setup',
             'global teardown',
             '✔ testThatWillPass',
-            'FAILURES: 7/9 assertions failed'
+            'FAILURES: 9/11 assertions failed'
         ];
-        if (err) {
-            throw err;
-        }
+
         test.deepEqual(expectedLines, output);
-        test.done();
+        test.done(err);
     });
 };
 
